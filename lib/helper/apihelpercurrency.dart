@@ -7,11 +7,12 @@ import '../modal/apimodalcurrency.dart';
 class Apihelpercurrency {
   Apihelpercurrency._();
   static final Apihelpercurrency apihelpercurrency = Apihelpercurrency._();
-  String BASE_URL = "https://apiv2.bitcoinaverage.com/constants/exchangerates";
-  String ENDPOINT = "/global";
+  String BASE_URL = "https://v6.exchangerate-api.com/v6/";
+  String apikey = '8d33ade4d414f5814371df4a';
+  String ENDPOINT = "/latest/USD";
 
   Future<Currencyapi?> fetchCurrencyConverter() async {
-    Uri API = Uri.parse(BASE_URL + ENDPOINT);
+    Uri API = Uri.parse(BASE_URL + apikey + ENDPOINT);
 
     http.Response response = await http.get(API);
 

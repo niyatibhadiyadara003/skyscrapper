@@ -14,43 +14,44 @@ class Peopleapi {
   String dob;
   String phone;
   String cell;
+  String profile;
 
-  Peopleapi({
-    required this.first,
-     required this.age,
-     required this.cell,
-     required this.city,
-     required this.country,
-     required this.dob,
-     required this.email,
-     required this.gender,
-     required this.last,
-     required this.phone,
-     required this.postcode,
-     required this.state,
-     required this.streetname,
-     required this.streetno,
-     required this.title,
-  });
+  Peopleapi(
+      {required this.first,
+      required this.age,
+      required this.cell,
+      required this.city,
+      required this.country,
+      required this.dob,
+      required this.email,
+      required this.gender,
+      required this.last,
+      required this.phone,
+      required this.postcode,
+      required this.state,
+      required this.streetname,
+      required this.streetno,
+      required this.title,
+      required this.profile});
 
-
-  factory Peopleapi.fromJson(Map<String,dynamic> json) {
-   return Peopleapi(
-   first: json['results'][0]['name']['first'],
-   age: json['results'][0]['dob']['age'],
-  cell: json['results'][0]['cell'],
-  city:  json['results'][0]['location']['city'],
-  country: json['results'][0]['location']['country'],
-  dob: json['results'][0]['dob']['date'],
-  email: json['results'][0]['email'],
-  gender: json['results'][0]['gender'],
-  last: json['results'][0]['name']['last'],
-  phone: json['results'][0]['phone'],
-  postcode: json['results'][0]['location']['postcode'],
-  state: json['results'][0]['location']['state'],
-     streetname: json['results'][0]['location']['street']['name'],
-  streetno: json['results'][0]['location']['street']['number'],
-  title: json['results'][0]['name']['title'],
-  );
+  factory Peopleapi.fromJson(Map<String, dynamic> json) {
+    return Peopleapi(
+      first: json['results'][0]['name']['first'],
+      age: json['results'][0]['dob']['age'],
+      cell: json['results'][0]['cell'],
+      city: json['results'][0]['location']['city'],
+      country: json['results'][0]['location']['country'],
+      dob: json['results'][0]['dob']['date'],
+      email: json['results'][0]['email'],
+      gender: json['results'][0]['gender'],
+      last: json['results'][0]['name']['last'],
+      phone: json['results'][0]['phone'],
+      postcode: json['results'][0]['location']['postcode'],
+      state: json['results'][0]['location']['state'],
+      streetname: json['results'][0]['location']['street']['name'],
+      streetno: json['results'][0]['location']['street']['number'],
+      title: json['results'][0]['name']['title'],
+      profile: json['results'][0]['picture']['medium'],
+    );
   }
 }

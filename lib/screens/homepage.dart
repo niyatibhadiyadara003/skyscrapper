@@ -32,6 +32,16 @@ class _HomePageState extends State<HomePage> {
         title: Text("Random people data"),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                fetchpeoples = Apihelper.apihelper.fetchrandompeopledata();
+              });
+            },
+            icon: const Icon(Icons.next_plan_outlined),
+          ),
+        ],
       ),
       body: Container(
         alignment: Alignment.center,
@@ -54,128 +64,140 @@ class _HomePageState extends State<HomePage> {
                   } else if (snapshot.hasData) {
                     Peopleapi fetchdata = snapshot.data;
                     return Padding(
-                        padding: const EdgeInsets.all(28.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: SingleChildScrollView(
-                          child: Container(
-                            padding: EdgeInsets.all(12),
-                            alignment: Alignment.center,
-                            height: 550,
-                            width: 400,
-                            decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Title : ${fetchdata.title}",
-                                  style: fontstyle,
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 50,
+                                backgroundImage:
+                                    NetworkImage(fetchdata.profile),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(12),
+                                alignment: Alignment.center,
+                                height: 530,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                  color: Colors.blueAccent,
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Title : ${fetchdata.title}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "FirstName : ${fetchdata.first}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "LastName : ${fetchdata.last} ",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Age : ${fetchdata.age}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Gender : ${fetchdata.gender}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Email : ${fetchdata.email}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Date Of Birth : ${fetchdata.dob}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Phone Number : ${fetchdata.phone}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Cell Numbeer : ${fetchdata.cell}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Post Code : ${fetchdata.postcode}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Street Number : ${fetchdata.streetno}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Street name : ${fetchdata.streetname}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "City : ${fetchdata.city}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "State : ${fetchdata.state}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Country : ${fetchdata.country}",
+                                      style: fontstyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 50,
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  "FirstName : ${fetchdata.first}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "LastName : ${fetchdata.last} ",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Age : ${fetchdata.age}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Gender : ${fetchdata.gender}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Email : ${fetchdata.email}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Date Of Birth : ${fetchdata.dob}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Phone Number : ${fetchdata.phone}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Cell Numbeer : ${fetchdata.cell}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Post Code : ${fetchdata.postcode}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Street Number : ${fetchdata.streetno}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Street name : ${fetchdata.streetname}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "City : ${fetchdata.city}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "State : ${fetchdata.state}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Country : ${fetchdata.country}",
-                                  style: fontstyle,
-                                ),
-                                const SizedBox(
-                                  height: 50,
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ));
                   } else {

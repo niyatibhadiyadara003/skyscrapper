@@ -1,42 +1,40 @@
-class Currencyapi
-{
-    final String INR;
-    final String USD;
-    final String JPY;
-    final String UGX;
-    final String CHF;
-    final String BZD;
-    final String MXN;
-    final String ZMW;
-    final String YER;
-    final String KGS;
+class Currencyapi {
+  final double INR;
+  final int USD;
+  final double JPY;
+  final double UGX;
+  final double CHF;
+  final double BZD;
+  final double MXN;
+  final double ZMW;
+  final double YER;
+  final double KGS;
 
-    Currencyapi ({
-      required this.INR,
-      required this.USD,
-      required this.JPY,
-      required this.UGX,
-      required this.CHF,
-      required this.BZD,
-      required this.MXN,
-      required this.ZMW,
-      required this.YER,
-      required this.KGS,
-    });
+  Currencyapi({
+    required this.INR,
+    required this.USD,
+    required this.JPY,
+    required this.UGX,
+    required this.CHF,
+    required this.BZD,
+    required this.MXN,
+    required this.ZMW,
+    required this.YER,
+    required this.KGS,
+  });
 
-    factory Currencyapi.fromJson(Map<String,dynamic> json){
-      return Currencyapi(
-        INR: json["rates"]["INR"]["rate"],
-        USD: json["rates"]["USD"]["rate"],
-        JPY: json["rates"]["JPY"]["rate"],
-        UGX: json["rates"]["UGX"]["rate"],
-        CHF: json["rates"]["CHF"]["rate"],
-        BZD: json["rates"]["BZD"]["rate"],
-        MXN: json["rates"]["MXN"]["rate"],
-        ZMW: json["rates"]["ZMW"]["rate"],
-        YER: json["rates"]["YER"]["rate"],
-        KGS: json["rates"]["KGS"]["rate"],
-      );
-    }
+  factory Currencyapi.fromJson(Map<String, dynamic> json) {
+    return Currencyapi(
+      INR: json['conversion_rates']["INR"],
+      USD: json['conversion_rates']["USD"],
+      JPY: json['conversion_rates']["JPY"],
+      UGX: json['conversion_rates']["UGX"],
+      CHF: json['conversion_rates']["CHF"],
+      BZD: json['conversion_rates']["BZD"],
+      MXN: json['conversion_rates']["MXN"],
+      ZMW: json['conversion_rates']["ZMW"],
+      YER: json['conversion_rates']["YER"],
+      KGS: json['conversion_rates']["KGS"],
+    );
+  }
 }
-

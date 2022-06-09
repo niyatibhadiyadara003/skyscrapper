@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:skyscrapper/screens/covidpage.dart';
 import 'package:skyscrapper/screens/currency.dart';
+import 'package:skyscrapper/screens/flagpage.dart';
 import 'package:skyscrapper/screens/homepage.dart';
 import 'package:skyscrapper/screens/mainpage.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    // home: HomePage(),
-    //home: CovidPage(),
-    home: MainPage(),
+    //home: HomePage(),
+    home: FlagPage(),
+    //home: MainPage(),
     //home: CryptoPage(),
   ));
 }

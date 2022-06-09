@@ -199,6 +199,7 @@ class _CryptoPageState extends State<CryptoPage> {
   TextStyle dataStyle = const TextStyle(
       fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold);
   TextStyle dataLightStyle = const TextStyle(
+    decoration: TextDecoration.none,
     fontSize: 18,
     color: Colors.white,
   );
@@ -210,14 +211,32 @@ class _CryptoPageState extends State<CryptoPage> {
     "INR",
     "USD",
     "JPY",
-    "UGX","CHF","BZD","MXN","ZMW","YER","KGS",
+    "UGX",
+    "CHF",
+    "BZD",
+    "MXN",
+    "ZMW",
+    "YER",
+    "KGS",
   ];
+  List items1 = [
+    "INR",
+    "USD",
+    "JPY",
+    "UGX",
+    "CHF",
+    "BZD",
+  ];
+  bool isios = false;
 
   @override
   void initState() {
     super.initState();
-    fetchcurrency= Apihelpercurrency.apihelpercurrency.fetchCurrencyConverter();
-    print(Apihelpercurrency.apihelpercurrency.fetchCurrencyConverter().runtimeType);
+    fetchcurrency =
+        Apihelpercurrency.apihelpercurrency.fetchCurrencyConverter();
+    print(Apihelpercurrency.apihelpercurrency
+        .fetchCurrencyConverter()
+        .runtimeType);
   }
 
   @override
@@ -225,102 +244,250 @@ class _CryptoPageState extends State<CryptoPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Crypto Convertor"),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-        elevation: 0,
-      ),
-      body: FutureBuilder(
-        future: fetchcurrency,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text("Error: ${snapshot.error}"),
-            );
-          } else if (snapshot.hasData) {
-            Currencyapi data = snapshot.data;
+    return (isios == false)
+        ? Scaffold(
+            appBar: AppBar(
+              title: const Text("Crypto Convertor"),
+              centerTitle: true,
+              backgroundColor: Colors.indigo.shade500,
+              elevation: 0,
+              actions: [
+                Switch(
+                    value: isios,
+                    onChanged: (val) {
+                      setState(() {
+                        isios = val;
+                      });
+                      print(val);
+                    }),
+              ],
+            ),
+            body: FutureBuilder(
+              future: fetchcurrency,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text("Error: ${snapshot.error}"),
+                  );
+                } else if (snapshot.hasData) {
+                  Currencyapi data = snapshot.data;
 
-            return Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    height: height * 0.04,
-                    width: width * 0.8,
-                    decoration: BoxDecoration(
-                      color: Colors.indigo.shade800,
-                    ),
-                    child: Text(
-                      "1 BTC = $btcConverter",
-                      style: dataLightStyle,
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    height: height * 0.05,
-                    width: width * 0.98,
-                    decoration: BoxDecoration(
-                      color: Colors.indigo.shade800,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  print(data.USD);
+
+                  return Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Current Currency",style: dataLightStyle,),
-                        const SizedBox(width: 20,),
-                        DropdownButton(
-                            dropdownColor: Colors.blueAccent,
-                            underline: Container(),
-                            icon: Icon(Icons.keyboard_arrow_down_outlined,size: 20,color: Colors.white,),
-                            style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white
-                            ),
-                            alignment: Alignment.bottomRight,
-
-                            value: dropDownVal,
-                            items: items.map((e) => DropdownMenuItem(
-                              value: e,
-                              child: Text("$e"),),).toList(),
-                            onChanged: (val) {
-                              dropDownVal = val! as String;
-                              setState(() {
-                                if(val == "USD"){
-                                  btcConverter = double.parse(data.USD) / 0.000026;
-                                }else if(val == "INR"){
-                                  btcConverter = double.parse(data.INR) / 0.000026;
-                                }else if(val == "JPY"){
-                                  btcConverter = double.parse(data.JPY) / 0.000026;
-                                }else if(val == "UGX"){
-                                  btcConverter = double.parse(data.UGX) / 0.000026;
-                                }else if(val == "CHF"){
-                                  btcConverter = double.parse(data.CHF) / 0.000026;
-                                }else if(val == "BZD"){
-                                  btcConverter = double.parse(data.BZD) / 0.000026;
-                                }else if(val == "MXN"){
-                                  btcConverter = double.parse(data.MXN) / 0.000026;
-                                }else if(val == "ZMW"){
-                                  btcConverter = double.parse(data.ZMW) / 0.000026;
-                                }else if(val == "YER"){
-                                  btcConverter = double.parse(data.YER) / 0.000026;
-                                }else if(val == "KGS"){
-                                  btcConverter = double.parse(data.KGS) / 0.000026;
-                                }
-                              });
-                            }),
+                        Spacer(),
+                        Container(
+                          height: height * 0.06,
+                          width: width * 0.8,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.indigo.shade800,
+                          ),
+                          child: Text(
+                            "1 BTC = $btcConverter",
+                            style: dataLightStyle,
+                          ),
+                        ),
+                        const Spacer(),
+                        Container(
+                          height: height * 0.08,
+                          width: width * 0.98,
+                          decoration: BoxDecoration(
+                            color: Colors.indigo.shade800,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                "Current Currency",
+                                style: dataLightStyle,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              DropdownButton(
+                                  dropdownColor: Colors.indigo.shade500,
+                                  underline: Container(),
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_outlined,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
+                                  style: const TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                  alignment: Alignment.bottomRight,
+                                  value: dropDownVal,
+                                  items: items
+                                      .map(
+                                        (e) => DropdownMenuItem(
+                                          value: e,
+                                          child: Text("$e"),
+                                        ),
+                                      )
+                                      .toList(),
+                                  onChanged: (val) {
+                                    dropDownVal = val! as String;
+                                    setState(() {
+                                      if (val == "USD") {
+                                        btcConverter = data.USD.toDouble();
+                                      } else if (val == "INR") {
+                                        btcConverter = data.INR;
+                                      } else if (val == "JPY") {
+                                        btcConverter = data.JPY;
+                                      } else if (val == "UGX") {
+                                        btcConverter = data.UGX;
+                                      } else if (val == "CHF") {
+                                        btcConverter = data.CHF;
+                                      } else if (val == "BZD") {
+                                        btcConverter = data.BZD;
+                                      } else if (val == "MXN") {
+                                        btcConverter = data.MXN;
+                                      } else if (val == "ZMW") {
+                                        btcConverter = data.ZMW;
+                                      } else if (val == "YER") {
+                                        btcConverter = data.YER;
+                                      } else if (val == "KGS") {
+                                        btcConverter = data.KGS;
+                                      }
+                                    });
+                                  }),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                       ],
                     ),
-                  ),
-                ],
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+          )
+        : CupertinoPageScaffold(
+            navigationBar: CupertinoNavigationBar(
+              middle: const Text(
+                "Crypto Convertor",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
+              backgroundColor: Colors.indigo,
+              trailing: CupertinoSwitch(
+                  value: isios,
+                  onChanged: (val) {
+                    setState(() {
+                      isios = val;
+                    });
+                  }),
+            ),
+            child: FutureBuilder(
+              future: fetchcurrency,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text("Error: ${snapshot.error}"),
+                  );
+                } else if (snapshot.hasData) {
+                  Currencyapi data = snapshot.data;
+
+                  print(data.USD);
+
+                  return Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Spacer(),
+                        Container(
+                          height: height * 0.06,
+                          width: width * 0.8,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.indigo.shade800,
+                          ),
+                          child: Text(
+                            "1 BTC = $btcConverter",
+                            style: dataLightStyle,
+                          ),
+                        ),
+                        const Spacer(),
+                        Container(
+                          height: height * 0.08,
+                          width: width * 0.98,
+                          decoration: BoxDecoration(
+                            color: Colors.indigo.shade800,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                "Current Currency",
+                                style: dataLightStyle,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              CupertinoContextMenu(
+                                  actions: items1
+                                      .map(
+                                        (e) => SingleChildScrollView(
+                                          child: CupertinoContextMenuAction(
+                                              child: Text("$e"),
+                                              onPressed: () {
+                                                setState(() {
+                                                  if (e == "USD") {
+                                                    btcConverter =
+                                                        data.USD.toDouble();
+                                                  } else if (e == "INR") {
+                                                    btcConverter = data.INR;
+                                                  } else if (e == "JPY") {
+                                                    btcConverter = data.JPY;
+                                                  } else if (e == "UGX") {
+                                                    btcConverter = data.UGX;
+                                                  } else if (e == "CHF") {
+                                                    btcConverter = data.CHF;
+                                                  } else if (e == "BZD") {
+                                                    btcConverter = data.BZD;
+                                                  } else if (e == "MXN") {
+                                                    btcConverter = data.MXN;
+                                                  } else if (e == "ZMW") {
+                                                    btcConverter = data.ZMW;
+                                                  } else if (e == "YER") {
+                                                    btcConverter = data.YER;
+                                                  } else if (e == "KGS") {
+                                                    btcConverter = data.KGS;
+                                                  }
+                                                  Navigator.of(context).pop();
+                                                });
+                                              }),
+                                        ),
+                                      )
+                                      .toList(),
+                                  child: Icon(
+                                    CupertinoIcons.app,
+                                    color: Colors.white,
+                                  ))
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
   }
 }

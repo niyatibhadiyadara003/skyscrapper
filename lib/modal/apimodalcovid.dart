@@ -220,73 +220,46 @@ class Covidapi {
   );
 }*/
 
-class Covidapi
-{
-  String loc;
-int totalConfirmed;
-int confirmedCasesIndian;
-int confirmedCasesForeign;
-int discharged;
-int deaths;
+class Covidapi {
+  String Country;
+  String CountryCode;
+  int TotalConfirmed;
+  int TotalDeaths;
+  int TotalRecovered;
+  static List fetchcountrycode = [];
 
-Covidapi({
-  required this.totalConfirmed,
-  required this.confirmedCasesForeign,
-  required this.confirmedCasesIndian,
-  required this.deaths,
-  required this.discharged,
-  required this.loc,
-});
+  Covidapi({
+    required this.Country,
+    required this.CountryCode,
+    required this.TotalConfirmed,
+    required this.TotalDeaths,
+    required this.TotalRecovered,
+  });
 
-
-factory Covidapi.fromJson(Map<String,dynamic> json){
+  factory Covidapi.fromJson(Map<String, dynamic> json) {
     return Covidapi(
-      totalConfirmed: json['data']['regional'][0]['totalConfirmed'],
-      confirmedCasesForeign: json['data']['regional'][0]['confirmedCasesForeign'],
-      confirmedCasesIndian: json['data']['regional'][0]['confirmedCasesIndian'],
-      deaths: json['data']['regional'][0]['deaths'],
-      discharged: json['data']['regional'][0]['discharged'],
-      loc: json['data']['regional'][0]['loc'],
+      Country: json['Country'],
+      CountryCode: json['CountryCode'],
+      TotalConfirmed: json['TotalConfirmed'],
+      TotalDeaths: json['TotalDeaths'],
+      TotalRecovered: json['TotalRecovered'],
     );
+  }
 }
-  factory Covidapi.fromJson1(Map<String,dynamic> json){
-    return Covidapi(
-      totalConfirmed: json['data']['regional'][1]['totalConfirmed'],
-      confirmedCasesForeign: json['data']['regional'][1]['confirmedCasesForeign'],
-      confirmedCasesIndian: json['data']['regional'][1]['confirmedCasesIndian'],
-      deaths: json['data']['regional'][1]['deaths'],
-      discharged: json['data']['regional'][1]['discharged'],
-      loc: json['data']['regional'][1]['loc'],
-    );
-  }
-  factory Covidapi.fromJson2(Map<String,dynamic> json){
-    return Covidapi(
-      totalConfirmed: json['data']['regional'][11]['totalConfirmed'],
-      confirmedCasesForeign: json['data']['regional'][11]['confirmedCasesForeign'],
-      confirmedCasesIndian: json['data']['regional'][11]['confirmedCasesIndian'],
-      deaths: json['data']['regional'][11]['deaths'],
-      discharged: json['data']['regional'][11]['discharged'],
-      loc: json['data']['regional'][11]['loc'],
-    );
-  }
-  factory Covidapi.fromJson3(Map<String,dynamic> json){
-    return Covidapi(
-      totalConfirmed: json['data']['regional'][23]['totalConfirmed'],
-      confirmedCasesForeign: json['data']['regional'][23]['confirmedCasesForeign'],
-      confirmedCasesIndian: json['data']['regional'][23]['confirmedCasesIndian'],
-      deaths: json['data']['regional'][23]['deaths'],
-      discharged: json['data']['regional'][23]['discharged'],
-      loc: json['data']['regional'][23]['loc'],
-    );
-  }
-  factory Covidapi.fromJson4(Map<String,dynamic> json){
-    return Covidapi(
-      totalConfirmed: json['data']['regional'][14]['totalConfirmed'],
-      confirmedCasesForeign: json['data']['regional'][14]['confirmedCasesForeign'],
-      confirmedCasesIndian: json['data']['regional'][14]['confirmedCasesIndian'],
-      deaths: json['data']['regional'][14]['deaths'],
-      discharged: json['data']['regional'][14]['discharged'],
-      loc: json['data']['regional'][14]['loc'],
+
+class Covidapiflag {
+  String iso2;
+  String flag;
+
+  Covidapiflag({
+    required this.iso2,
+    required this.flag,
+  });
+
+  factory Covidapiflag.fromJson(Map<String, dynamic> json) {
+    return Covidapiflag(
+      iso2: json['iso2'],
+      flag: json['flag'],
     );
   }
 }
